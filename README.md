@@ -1,1 +1,1 @@
-# EM-MarkovChain-trajectories
+# EM-clustering-on-Markov-Chains
