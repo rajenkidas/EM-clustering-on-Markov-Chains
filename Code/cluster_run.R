@@ -1,3 +1,4 @@
+traj <- load("trajectorysample.R")
 
 set.seed(4115)
 
