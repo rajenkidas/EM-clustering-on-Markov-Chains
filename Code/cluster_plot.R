@@ -20,32 +20,7 @@ for (k in 1:no.classes) {
   class.index[[k]]<-which(gamma[,k]==1)
 }
 
-
-
-#for people in cluster k, find the transiton matrix
-list.count.per.cluster<-vector("list", no.classes)
-for (j in 1:no.classes) {
-  count.per.cluster<-matrix(c(rep(0,no.states*no.states)),no.states,no.states)
-  for(k in 1:length(class.index[[j]])){
-    a=class.index[[j]][k]
-    for(i in 1:length(traj[[a]])-1)
-    {
-      count.per.cluster[traj[[a]][i],traj[[a]][i+1]] <- 
-        (count.per.cluster[traj[[a]][i],traj[[a]][i+1]])+1
-    }
-    list.count.per.cluster[[j]]<-count.per.cluster
-  }
-}
-
-list.trans.per.cluster<-list.count.per.cluster
-for (i in 1:length(list.trans.per.cluster)) {
-  for (j in 1:nrow(list.trans.per.cluster[[i]])) {
-    list.trans.per.cluster[[i]][j,]<-list.trans.per.cluster[[i]][j,]/sum(list.trans.per.cluster[[i]][j,])
-  }
-}
-
-###
-
+list.trans.per.cluster<-list.mats 
 
 #Stationary distribution
 
