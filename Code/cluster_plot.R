@@ -8,7 +8,7 @@ library(pheatmap)
 library(reshape2) #melt
 library(RColorBrewer)
 library(rcartocolor)
-library(colorspace) #to add diff mid pt to colour scheme
+library(colorspace) #to add different mid point to colour scheme
 library(ggpubr) #ggarrange
 library(cowplot) #plotgrid
 library(expm) #exponential
@@ -35,7 +35,7 @@ stat.dis<-rbind( P[1,], Q[1,], R[1,], S[1,])
 rownames(stat.dis)<-c('A','B','C','D')
 
 rownames(stat.dis)<-c('A','B','C','D')
-colnames(stat.dis) <- c("G G", "G B", "B G", "B B")
+colnames(stat.dis) <- c("G L", "G H", "B L", "B H")
 
 library(reshape2)
 df <- melt(stat.dis)  #the function melt reshapes it from wide to long
@@ -79,10 +79,10 @@ ggarrange(statdist2,statdist1, common.legend = TRUE,nrow=2)
 
 
 Breaks <- seq(0.1, 0.6, length = 50)
-statelabs <- c("G G",
-               "G B",
-               "B G",
-               "B B")
+statelabs <- c("G L",
+               "G H",
+               "B L",
+               "B H")
 
 
 for(i in 1:no.classes){
@@ -118,98 +118,6 @@ clusters_combined<-rbind(c1, c2, c3, c4)
 #plot (change the cluster number in the square brackets in first line)
 #NOTE: the axes of to and from in the plots. (For ease in reading.)
 
-plot1<-
-  ggplot(c1, aes(x = To, y = From)) + 
-  geom_tile(aes(fill = Probability)) + 
-  theme(panel.background = element_blank(), 
-        axis.title.x.top = element_text("To"),
-        axis.ticks.y = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.title = element_text(size=10,face="bold"),
-        axis.text = element_text(size=12),
-        legend.text = element_text(size = 10),
-        legend.title = element_text(size = 14),
-        plot.title = element_text(hjust = 0.5))+
-  coord_equal()+
-  scale_x_discrete(labels=statelabs)+
-  scale_y_discrete(labels=statelabs)+
-  scale_fill_continuous_divergingx(palette = 'RdBu', mid = 0.25,
-                                   rev=TRUE,
-                                   p1 = 0.5,p2=0.25, p3 = 1, p4=0.5,
-                                   breaks=seq(0.25, 0.6, by=0.15)
-                                   )+
-  ggtitle(label = "Cluster 1")
-#ggplot(c1, aes(x = From, y = To)) + 
-# geom_tile(aes(fill = Probability)) + theme(panel.background = element_blank())+
-#  scale_fill_continuous_diverging(palette = 'Blue-Red', mid = 0.25, 
-#                             breaks=seq(0.25, 0.8)) 
-plot2<-
-  ggplot(c2, aes(x = To, y = From)) + 
-  geom_tile(aes(fill = Probability)) + 
-  theme(panel.background = element_blank(), 
-        axis.title.x.top = element_text("To"),
-        axis.ticks.y = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.title = element_text(size=10,face="bold"),
-        axis.text = element_text(size=12),
-        legend.text = element_text(size = 10),
-        legend.title = element_text(size = 14),
-        plot.title = element_text(hjust = 0.5))+
-  coord_equal()+
-  scale_x_discrete(labels=statelabs)+
-  scale_y_discrete(labels=statelabs)+
-  scale_fill_continuous_divergingx(palette = 'RdBu', mid = 0.25,
-                                   rev=TRUE,
-                                   p1 = 0.5,p2=0.25, p3 = 1, p4=0.5,
-                                   breaks=seq(0.25, 0.6, by=0.15)
-  )+
-  ggtitle(label = "Cluster 2")
-
-
-
-plot3<-
-  ggplot(c3, aes(x = To, y = From)) + 
-  geom_tile(aes(fill = Probability)) + 
-  theme(panel.background = element_blank(), 
-        axis.title.x.top = element_text("To"),
-        axis.ticks.y = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.title = element_text(size=10,face="bold"),
-        axis.text = element_text(size=12),
-        legend.text = element_text(size = 10),
-        legend.title = element_text(size = 14),
-        plot.title = element_text(hjust = 0.5))+
-  coord_equal()+
-  scale_x_discrete(labels=statelabs)+
-  scale_y_discrete(labels=statelabs)+
-  scale_fill_continuous_divergingx(palette = 'RdBu', mid = 0.25,
-                                   rev=TRUE,
-                                   p1 = 0.5,p2=0.25, p3 = 1, p4=0.5,
-                                   breaks=seq(0.25, 0.6, by=0.15)
-  )+
-  ggtitle(label = "Cluster 3")
-
-plot4<-
-  ggplot(c4, aes(x = To, y = From)) + 
-  geom_tile(aes(fill = Probability)) + 
-  theme(panel.background = element_blank(), 
-        axis.title.x.top = element_text("To"),
-        axis.ticks.y = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.title = element_text(size=10,face="bold"),
-        axis.text = element_text(size=12),
-        legend.text = element_text(size = 10),
-        legend.title = element_text(size = 14),
-        plot.title = element_text(hjust = 0.5))+
-  coord_equal()+
-  scale_x_discrete(labels=statelabs)+
-  scale_y_discrete(labels=statelabs)+
-  scale_fill_continuous_divergingx(palette = 'RdBu', mid = 0.25,
-                                   rev=TRUE,
-                                   p1 = 0.5,p2=0.25, p3 = 1, p4=0.5,
-                                   breaks=seq(0.25, 0.6, by=0.15)
-  )+
-  ggtitle(label = "Cluster 4")
 
 ggplot(clusters_combined, aes(x = To, y = From)) + 
   geom_tile(aes(fill = Probability)) + 
@@ -238,60 +146,4 @@ ggplot(clusters_combined, aes(x = To, y = From)) +
   facet_wrap(~clust) #+ggtitle(label = "Transition of state (Mood, Pain)") + 
 
 
-library(markovchain)
-statesNames <- statelabs
-markovB <- new("markovchain", states = statesNames, transitionMatrix =
-                 list.trans.per.cluster[[1]],
-               name = "A markovchain Object"
-)
-steadyStates(markovB) #displays stat dist, which matches what we've found above
-
-###############################################################################
-
-Cluster1 <- new("markovchain", states = c("M G P G", "M G P B", "M B P G", "M B P B"),
-                 transitionMatrix = matrix(data = list.trans.per.cluster[[1]], 
-                                           nrow = 4),
-                 name = "Cluster 1")
-
-
-Cluster2<- new("markovchain", states = c("M G P G", "M G P B", "M B P G", "M B P B"),
-                transitionMatrix = matrix(data = list.trans.per.cluster[[2]], 
-                                          nrow = 4),
-                name = "Cluster 2")
-
-
-Cluster3 <- new("markovchain", states = c("M G P G", "M G P B", "M B P G", "M B P B"),
-                transitionMatrix = matrix(data = list.trans.per.cluster[[3]], 
-                                          nrow = 4),
-                name = "Cluster 3")
-
-Cluster4 <- new("markovchain", states = c("M G P G", "M G P B", "M B P G", "M B P B"),
-                transitionMatrix = matrix(data = list.trans.per.cluster[[4]], 
-                                          nrow = 4),
-                name = "Cluster 4")
-
-
-# Dummy data
-
-set.seed(1)
-s11<-rmarkovchain(n = 7, object = Cluster1, t0 = "M G P G")
-
-set.seed(2)
-s12<-rmarkovchain(n = 7, object = Cluster1, t0 = "M G P G")
-
-set.seed(3)
-s13<-rmarkovchain(n = 7, object = Cluster1, t0 = "M G P G")
-
-
-
-data.seq <- data.frame(
-  day = c("1", "2", "3", "4", "5", "6", "7"),
-  value = c(s11,s12,s13)
-)
-
-# Most basic bubble plot
-p <- ggplot(data.seq, aes(x=day, y=value)) +
-  geom_line() + 
-  xlab("")
-p
 
