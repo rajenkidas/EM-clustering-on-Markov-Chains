@@ -4,7 +4,7 @@
 #count of transitions per subject where no.states is the number of states
 #traj is the dataset with the columns subjects and state i.e. the sequence
 #of states can be found from here
-#no.states<-4 #depending on the no. of non na transtype states kept.
+#no.states <- 4 #depending on the no. of non na transtype states kept.
 #############################################################
 ############### F U N C T I O N S ###########################
 #############################################################
